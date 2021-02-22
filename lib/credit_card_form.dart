@@ -136,7 +136,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 ),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Card number1',
+                  labelText: 'Card number',
                   hintText: 'xxxx xxxx xxxx xxxx',
                 ),
                 keyboardType: TextInputType.number,
@@ -154,7 +154,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 ),
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Expired Date1',
+                    labelText: 'Expired Date',
                     hintText: 'MM/YY'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
@@ -172,7 +172,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 ),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'CVV1',
+                  labelText: 'CVV',
                   hintText: 'XXXX',
                 ),
                 keyboardType: TextInputType.number,
@@ -195,7 +195,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 ),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Card Holder1',
+                  labelText: 'Card Holder',
                 ),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
