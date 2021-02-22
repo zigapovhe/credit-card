@@ -134,9 +134,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 style: TextStyle(
                   color: widget.textColor,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Card number',
+                  labelText: 'Card number1',
                   hintText: 'xxxx xxxx xxxx xxxx',
                 ),
                 keyboardType: TextInputType.number,
@@ -152,9 +152,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 style: TextStyle(
                   color: widget.textColor,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Expired Date',
+                    labelText: 'Expired Date1',
                     hintText: 'MM/YY'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
@@ -170,9 +170,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 style: TextStyle(
                   color: widget.textColor,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'CVV',
+                  labelText: 'CVV1',
                   hintText: 'XXXX',
                 ),
                 keyboardType: TextInputType.number,
@@ -193,9 +193,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 style: TextStyle(
                   color: widget.textColor,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Card Holder',
+                  labelText: 'Card Holder1',
                 ),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,

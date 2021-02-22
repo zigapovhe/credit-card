@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CreditCardWidget extends StatefulWidget {
   const CreditCardWidget({
@@ -144,7 +145,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
     Orientation orientation,
   ) {
     final TextStyle defaultTextStyle = Theme.of(context).textTheme.title.merge(
-          TextStyle(
+          const TextStyle(
             color: Colors.black,
             fontFamily: 'halter',
             fontSize: 16,
@@ -265,7 +266,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
     Orientation orientation,
   ) {
     final TextStyle defaultTextStyle = Theme.of(context).textTheme.title.merge(
-          TextStyle(
+          const TextStyle(
             color: Colors.white,
             fontFamily: 'halter',
             fontSize: 16,
@@ -321,8 +322,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                     padding: const EdgeInsets.only(left: 16),
                     child: Row(
                       children: <Widget>[
-                        Text(
-                          'Expiry',
+                        const Text(
+                          'Expiry1',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'halter',
@@ -354,7 +355,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                           : widget.cardHolderName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'halter',
                         fontSize: 14,
@@ -405,6 +406,11 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       <String>['270', '271'],
       <String>['2720'],
     },
+    CardType.maestro: <List<String>>{
+      <String>['5018', '5038'],
+      <String>['56', '58'],
+      <String>['63', '67'],
+    }
   };
 
   /// This function determines the Credit Card type based on the cardPatterns
@@ -463,41 +469,55 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
     Widget icon;
     switch (detectCCType(cardNumber)) {
       case CardType.visa:
-        icon = Image.asset(
-          'icons/visa.png',
-          height: 64,
-          width: 64,
-          package: 'credit_card',
+        icon = SvgPicture.asset(
+            'assets/visa.svg',
+            height: 64,
+            semanticsLabel: 'Visa logo',
+            package: 'credit_card'
         );
         isAmex = false;
         break;
 
       case CardType.americanExpress:
-        icon = Image.asset(
-          'icons/amex.png',
-          height: 64,
-          width: 64,
-          package: 'credit_card',
+        icon = SvgPicture.asset(
+            'assets/amex.svg',
+            height: 64,
+            width: 64,
+            semanticsLabel: 'American Express logo',
+            package: 'credit_card'
         );
         isAmex = true;
         break;
 
       case CardType.mastercard:
-        icon = Image.asset(
-          'icons/mastercard.png',
-          height: 64,
-          width: 64,
-          package: 'credit_card',
+        icon = SvgPicture.asset(
+            'assets/mastercard.svg',
+            height: 64,
+            width: 64,
+            semanticsLabel: 'Mastercard logo',
+            package: 'credit_card'
+        );
+        isAmex = false;
+        break;
+
+      case CardType.maestro:
+        icon = SvgPicture.asset(
+            'assets/maestro.svg',
+            height: 64,
+            width: 64,
+            semanticsLabel: 'Maestro logo',
+            package: 'credit_card'
         );
         isAmex = false;
         break;
 
       case CardType.discover:
-        icon = Image.asset(
-          'icons/discover.png',
-          height: 64,
-          width: 64,
-          package: 'credit_card',
+        icon = SvgPicture.asset(
+            'assets/discover.svg',
+            height: 64,
+            width: 64,
+            semanticsLabel: 'Discover logo',
+            package: 'credit_card'
         );
         isAmex = false;
         break;
@@ -550,9 +570,9 @@ class MaskedTextController extends TextEditingController {
 
     addListener(() {
       final String previous = _lastUpdatedText;
-      if (this.beforeChange(previous, this.text)) {
+      if (beforeChange(previous, this.text)) {
         updateText(this.text);
-        this.afterChange(previous, this.text);
+        afterChange(previous, this.text);
       } else {
         updateText(_lastUpdatedText);
       }
@@ -669,6 +689,7 @@ enum CardType {
   visa,
   americanExpress,
   discover,
+  maestro
 }
 
 String randomPic = 'https://placeimg.com/680/400/nature';
@@ -698,11 +719,12 @@ Container getRandomBackground(double height, double width) {
 Container getChipImage() {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: Image.asset(
-      'icons/chip.png',
-      height: 52,
-      width: 52,
-      package: 'credit_card',
-    ),
+    child: SvgPicture.asset(
+        'assets/chip.svg',
+        height: 52,
+        width: 52,
+        semanticsLabel: 'Chip',
+        package: 'credit_card'
+    )
   );
 }
