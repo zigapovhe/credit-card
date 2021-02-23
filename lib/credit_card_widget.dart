@@ -401,9 +401,20 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       <String>['2720'],
     },
     CardType.maestro: <List<String>>{
-      <String>['5018', '5038'],
+      <String>['493698'],
+      <String>['500000', '506698'],
+      <String>['506779', '508999'],
       <String>['56', '58'],
       <String>['63', '67'],
+    },
+    CardType.dinersclub: <List<String>>{
+      <String>['300', '305'],
+      <String>['36'],
+      <String>['38'],
+      <String>['39'],
+    },
+    CardType.hipercard: <List<String>>{
+      <String>['606282'],
     }
   };
 
@@ -512,6 +523,28 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             height: 32,
             width: 32,
             semanticsLabel: 'Discover logo',
+            package: 'credit_card'
+        );
+        isAmex = false;
+        break;
+
+      case CardType.dinersclub:
+        icon = SvgPicture.asset(
+            'assets/dinersclub.svg',
+            height: 32,
+            width: 32,
+            semanticsLabel: 'DinersClub logo',
+            package: 'credit_card'
+        );
+        isAmex = false;
+        break;
+
+      case CardType.hipercard:
+        icon = SvgPicture.asset(
+            'assets/hipercard.svg',
+            height: 32,
+            width: 32,
+            semanticsLabel: 'HiperCard logo',
             package: 'credit_card'
         );
         isAmex = false;
@@ -680,7 +713,9 @@ enum CardType {
   visa,
   americanExpress,
   discover,
-  maestro
+  maestro,
+  dinersclub,
+  hipercard,
 }
 
 String randomPic = 'https://placeimg.com/680/400/nature';

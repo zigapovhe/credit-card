@@ -16,7 +16,10 @@ A Flutter package allows you to easily implement the Credit card's UI easily wit
     
 ```dart
 dependencies:
-    credit_card: 0.1.6
+     credit_card:
+       git:
+          url: git://github.com/zigapovhe/credit-card.git
+          ref: master
 ```
 
 2.  Import the package
@@ -60,6 +63,14 @@ import 'package:credit_card/flutter_credit_card.dart';
       onCreditCardModelChange: (CreditCardModel data) {},
     ),
 ```
+## Supported Cards
+    * Visa
+    * Mastercard
+    * American Express
+    * Discover
+    * Diners Club
+    * Maestro
+    * Hiper/Hipercard
 
 ## How to use
 Check out the **example** app in the [example](example) directory or the 'Example' tab on pub.dartlang.org for a more complete example.
