@@ -348,7 +348,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                       Container(
                         width: 16,
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 16),
+                      Padding(padding: const EdgeInsets.only(bottom: 16),
                       child: Text(
                         widget.expiryDate.isEmpty
                             ? 'MM/YY'
@@ -465,7 +465,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       case CardType.visa:
         icon = SvgPicture.asset(
             'assets/visa.svg',
-            height: 64,
+            height: 32,
+            width: 32,
             semanticsLabel: 'Visa logo',
             package: 'credit_card'
         );
@@ -475,8 +476,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       case CardType.americanExpress:
         icon = SvgPicture.asset(
             'assets/amex.svg',
-            height: 64,
-            width: 64,
+            height: 32,
+            width: 32,
             semanticsLabel: 'American Express logo',
             package: 'credit_card'
         );
@@ -486,8 +487,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       case CardType.mastercard:
         icon = SvgPicture.asset(
             'assets/mastercard.svg',
-            height: 64,
-            width: 64,
+            height: 32,
+            width: 32,
             semanticsLabel: 'Mastercard logo',
             package: 'credit_card'
         );
@@ -497,8 +498,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       case CardType.maestro:
         icon = SvgPicture.asset(
             'assets/maestro.svg',
-            height: 64,
-            width: 64,
+            height: 32,
+            width: 32,
             semanticsLabel: 'Maestro logo',
             package: 'credit_card'
         );
@@ -508,8 +509,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       case CardType.discover:
         icon = SvgPicture.asset(
             'assets/discover.svg',
-            height: 64,
-            width: 64,
+            height: 32,
+            width: 32,
             semanticsLabel: 'Discover logo',
             package: 'credit_card'
         );
@@ -518,8 +519,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
 
       default:
         icon = Container(
-          height: 64,
-          width: 64,
+          height: 32,
+          width: 32,
         );
         isAmex = false;
         break;
