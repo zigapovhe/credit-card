@@ -13,6 +13,7 @@ class MySample extends StatefulWidget {
 }
 
 class MySampleState extends State<MySample> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -22,7 +23,7 @@ class MySampleState extends State<MySample> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Credit Card View Demo',
+      title: 'Credit Card View Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -42,10 +43,30 @@ class MySampleState extends State<MySample> {
               Expanded(
                 child: SingleChildScrollView(
                   child: CreditCardForm(
+                    formKey: _formKey,
                     onCreditCardModelChange: onCreditCardModelChange,
                   ),
                 ),
-              )
+              ),
+              ElevatedButton(
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                    child: const Text('Validate',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'halter',
+                        fontSize: 14,
+                        package: 'flutter_credit_card'),
+                    ),
+                ),
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    print('valid!');
+                  } else {
+                    print('invalid!');
+                    }
+                  },
+              ),
             ],
           ),
         ),
