@@ -296,7 +296,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  height: 16,
+                  height: 42,
                 ),
                 getChipImage(),
                 Container(
@@ -311,17 +311,32 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                     style: widget.textStyle ?? defaultTextStyle,
                   ),
                 ),
-                Container(
-                  height: 8,
-                ),
                 Expanded(
                   flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Row(
-                      children: <Widget>[
-                        const Text(
-                          'Expiry1',
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                        child: Text(
+                          widget.cardHolderName.isEmpty
+                              ? 'CARD HOLDER'
+                              : widget.cardHolderName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'halter',
+                            fontSize: 14,
+                            package: 'credit_card',
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding:
+                        EdgeInsets.only(left: 16, bottom: 16),
+                        child: Text(
+                          'Expiry',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'halter',
@@ -329,36 +344,18 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                             package: 'credit_card',
                           ),
                         ),
-                        Container(
-                          width: 16,
-                        ),
-                        Text(
-                          widget.expiryDate.isEmpty
-                              ? 'MM/YY'
-                              : widget.expiryDate,
-                          style: widget.textStyle ?? defaultTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                    child: Text(
-                      widget.cardHolderName.isEmpty
-                          ? 'CARD HOLDER'
-                          : widget.cardHolderName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'halter',
-                        fontSize: 14,
-                        package: 'credit_card',
                       ),
-                    ),
+                      Container(
+                        width: 16,
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        widget.expiryDate.isEmpty
+                            ? 'MM/YY'
+                            : widget.expiryDate,
+                        style: widget.textStyle ?? defaultTextStyle)
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -590,7 +587,9 @@ class MaskedTextController extends TextEditingController {
   String _lastUpdatedText = '';
 
   void updateText(String text) {
-      this.text = '';
+    if(text != ''){
+      this.text = _applyMask(mask, text);
+    }
     _lastUpdatedText = this.text;
   }
 
