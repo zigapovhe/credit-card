@@ -65,48 +65,10 @@ class CreditCardSlider extends StatelessWidget {
     return AnimatedBuilder(
       animation: _pageController!,
       builder: (BuildContext context, Widget? child) {
-        double value = 1.0;
-
-        final int mIndex = index % length;
-        final int mInitialPage = initialCard % length;
-
-        if (_pageController!.position.haveDimensions) {
-          value = _pageController!.page! - index;
-
-          if (value >= 0) {
-            final double _lowerLimit = percentOfUpperCard;
-            const double _upperLimit = pi / 2;
-
-            value = (_upperLimit - (value.abs() * (_upperLimit - _lowerLimit)))
-                .clamp(_lowerLimit, _upperLimit);
-            value = _upperLimit - value;
-            value *= -1;
-          }
-        } else {
-          if (mIndex == mInitialPage) {
-            //This will show that card fully
-            value = 0;
-          } else if (mInitialPage == 0 || mIndex == mInitialPage - 1) {
-            //This will show the upper card with the percentage specified
-            value = -(pi / 2 - percentOfUpperCard);
-          } else if (mIndex == mInitialPage + 1) {
-            //This will be fixed
-            value = -1;
-          } else {
-            //This will hide the other cards
-            value = pi / 2;
-          }
-        }
 
         return Center(
-          child: Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateX(value),
-            alignment: Alignment.center,
-            child: child,
-          ),
-        );
+          child: child,
+          );
       },
       child: GestureDetector(
         onTap: () {
