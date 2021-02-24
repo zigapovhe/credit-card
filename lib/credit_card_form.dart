@@ -135,44 +135,47 @@ class _CreditCardFormState extends State<CreditCardForm> {
       ),
       child: Form(
         key: widget.formKey,
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
-              child: TextFormField(
-                controller: _cardNumberController,
-                cursorColor: widget.cursorColor ?? themeColor,
-                onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(expiryDateNode);
-                },
-                style: TextStyle(
-                  color: widget.textColor,
+        child: AutofillGroup(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                child: TextFormField(
+                  controller: _cardNumberController,
+                  autofillHints: const  [AutofillHints.creditCardNumber],
+                  cursorColor: widget.cursorColor ?? themeColor,
+                  onEditingComplete: () {
+                    FocusScope.of(context).requestFocus(expiryDateNode);
+                  },
+                  style: TextStyle(
+                    color: widget.textColor,
+                  ),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Card number',
+                    hintText: 'xxxx xxxx xxxx xxxx',
+                  ),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  validator: (String? value) {
+                    // Validate less that 13 digits +3 white spaces
+                    if (value!.isEmpty || value.length < 16) {
+                      return widget.numberValidationMessage;
+                    }
+                    return null;
+                  },
                 ),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Card number',
-                  hintText: 'xxxx xxxx xxxx xxxx',
-                ),
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                validator: (String? value) {
-                  // Validate less that 13 digits +3 white spaces
-                  if (value!.isEmpty || value.length < 16) {
-                    return widget.numberValidationMessage;
-                  }
-                  return null;
-                },
               ),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
+              Row(
+                children: <Widget>[
+                  Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
                       child: TextFormField(
                         controller: _expiryDateController,
+                        autofillHints: const [AutofillHints.creditCardExpirationDate],
                         cursorColor: widget.cursorColor ?? themeColor,
                         style: TextStyle(
                           color: widget.textColor,
@@ -205,69 +208,72 @@ class _CreditCardFormState extends State<CreditCardForm> {
                         },
                       ),
                     ),
-                ),
-                Expanded(
-                  child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
-                  child: TextFormField(
-                    focusNode: cvvFocusNode,
-                    controller: _cvvCodeController,
-                    cursorColor: widget.cursorColor ?? themeColor,
-                    onEditingComplete: () {
-                      FocusScope.of(context).requestFocus(cardHolderNode);
-                    },
-                    style: TextStyle(
-                      color: widget.textColor,
-                    ),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'CVV',
-                      hintText: 'XXXX',
-                    ),
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    onChanged: (String text) {
-                      setState(() {
-                        cvvCode = text;
-                      });
-                    },
-                    validator: (String? value) {
-                      if (value!.isEmpty || value.length < 3) {
-                        return widget.cvvValidationMessage;
-                      }
-                      return null;
-                    },
                   ),
-                ),
-                )
-              ],
-            ),
-
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
-              child: TextFormField(
-                controller: _cardHolderNameController,
-                focusNode: cardHolderNode,
-                cursorColor: widget.cursorColor ?? themeColor,
-                style: TextStyle(
-                  color: widget.textColor,
-                ),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Card Holder',
-                ),
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: () {
-                  onCreditCardModelChange(creditCardModel);
-                },
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                      child: TextFormField(
+                        focusNode: cvvFocusNode,
+                        controller: _cvvCodeController,
+                        autofillHints: const [AutofillHints.creditCardSecurityCode],
+                        cursorColor: widget.cursorColor ?? themeColor,
+                        onEditingComplete: () {
+                          FocusScope.of(context).requestFocus(cardHolderNode);
+                        },
+                        style: TextStyle(
+                          color: widget.textColor,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'CVV',
+                          hintText: 'XXXX',
+                        ),
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
+                        onChanged: (String text) {
+                          setState(() {
+                            cvvCode = text;
+                          });
+                        },
+                        validator: (String? value) {
+                          if (value!.isEmpty || value.length < 3) {
+                            return widget.cvvValidationMessage;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
 
-          ],
-        ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                child: TextFormField(
+                  controller: _cardHolderNameController,
+                  autofillHints: const [AutofillHints.creditCardGivenName],
+                  focusNode: cardHolderNode,
+                  cursorColor: widget.cursorColor ?? themeColor,
+                  style: TextStyle(
+                    color: widget.textColor,
+                  ),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Card Holder',
+                  ),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () {
+                    onCreditCardModelChange(creditCardModel);
+                  },
+                ),
+              ),
+
+            ],
+          ),
+        )
       ),
     );
   }
