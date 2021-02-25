@@ -65,12 +65,9 @@ class CreditCardSlider extends StatelessWidget {
     return AnimatedBuilder(
       animation: _pageController!,
       builder: (BuildContext context, Widget? child) {
-        return AspectRatio(
-          aspectRatio: 3/2,
-          child: Center(
+        return Center(
             child: child,
-          ),
-        );
+          );
       },
       child: GestureDetector(
         onTap: () {
