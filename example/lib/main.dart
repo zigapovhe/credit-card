@@ -168,7 +168,7 @@ class CreditCardSliderScreen extends StatelessWidget {
       body: Center(
         child: CreditCardSlider(
             _creditCards,
-          initialCard: 2,
+          initialCard: 1,
           onCardClicked: (int index) {
             print('Clicked at index: $index');
           },
