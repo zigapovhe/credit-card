@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -221,7 +222,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                             color: Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Text(
+                              child: AutoSizeText(
                                 widget.cvvCode.isEmpty
                                     ? isAmex ? 'XXXX' : 'XXX'
                                     : isAmex
@@ -311,7 +312,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Text(
+                  child: AutoSizeText(
                     widget.cardNumber.isEmpty
                         ? 'XXXX XXXX XXXX XXXX'
                         : widget.cardNumber,
@@ -325,7 +326,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                       Padding(
                         padding:
                         const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                        child: Text(
+                        child: AutoSizeText(
                           widget.cardHolderName.isEmpty
                               ? 'CARD HOLDER'
                               : widget.cardHolderName,
@@ -342,7 +343,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                       const Padding(
                         padding:
                         EdgeInsets.only(left: 16, bottom: 16),
-                        child: Text(
+                        child: AutoSizeText(
                           'Expiry',
                           style: TextStyle(
                             color: Colors.white,
@@ -356,7 +357,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                         width: 16,
                       ),
                       Padding(padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(
+                      child: AutoSizeText(
                         widget.expiryDate.isEmpty
                             ? 'MM/YY'
                             : widget.expiryDate,
