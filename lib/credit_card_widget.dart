@@ -122,20 +122,14 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
 
     return Stack(
       children: <Widget>[
-        AspectRatio(
-          aspectRatio: 3/2,
-          child: AnimationCard(
+        AnimationCard(
             animation: _frontRotation,
             child: buildFrontContainer(width, height, context, orientation),
           ),
-        ),
 
-        AspectRatio(
-          aspectRatio: 3/2,
-          child: AnimationCard(
+        AnimationCard(
             animation: _backRotation,
             child: buildBackContainer(width, height, context, orientation),
-          ),
         )
       ],
     );
