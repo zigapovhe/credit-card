@@ -63,6 +63,15 @@ import 'package:credit_card/flutter_credit_card.dart';
       onCreditCardModelChange: (CreditCardModel data) {},
     ),
 ```
+4.  Adding CreditCardSlider
+
+```dart
+    CreditCardSlider(
+      _creditCards, //List of credit cards
+      initialCard: 1,
+      onCardClicked: (int index) {},
+    ),
+```
 ## Supported Cards
     * Visa
     * Mastercard

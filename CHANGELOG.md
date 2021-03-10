@@ -1,3 +1,8 @@
+## 0.2.0-nullsafety.1
+*   Credit Card Widget is now fully responsive
+*   Issues with CreditCardSlider are fixed
+*   Code Improvements
+
 ## 0.2.0-nullsafety.0
 *   Feature : Migrated package to null-safety
 *   Improvement: Added maestro recognition support
