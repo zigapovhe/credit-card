@@ -38,7 +38,7 @@ class CreditCardSlider extends StatelessWidget {
       initialCard = (creditCards.length * 1000000) + initialCard;
     }
     _pageController = PageController(
-      viewportFraction: 0.3,
+      viewportFraction: 0.35,
       initialPage: initialCard,
     );
   }
