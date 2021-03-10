@@ -50,6 +50,21 @@ class MainPage extends StatelessWidget {
                 );
               },
             ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: kBlue
+              ),
+              child: const Text('Credit card slider with tabs',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => UniBillScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -177,5 +192,111 @@ class CreditCardSliderScreen extends StatelessWidget {
     );
   }
 }
+
+class UniBillScreen extends StatefulWidget {
+  @override
+  _UniBillScreenState createState() => _UniBillScreenState();
+}
+
+class _UniBillScreenState extends State<UniBillScreen> with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  List<Tab> myTabs;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    myTabs = [
+      const Tab(text: 'Payment'),
+      const Tab(text: 'Loyality'),
+    ];
+    _tabController = TabController(length: myTabs.length, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+   return Scaffold(
+     body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 7,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(18),
+                    topRight: Radius.circular(18),
+                  ),
+                ),
+                child: TabBar(
+                  tabs: myTabs,
+                  controller: _tabController,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 93,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(18),
+                    bottomRight: Radius.circular(18),
+                  ),
+                ),
+                child: TabBarView(controller: _tabController, children: [
+                  Center(
+                      child: Expanded(
+                        child: CreditCardSlider(_creditCards,
+                          initialCard: 1,
+                          onCardClicked: (int index) {
+                          },
+                          //List of credit cards),
+                        ),
+                      )
+                  ),
+                  const Center(child: Text('Testtt2')),
+                ]),
+              ),
+            )
+          ],
+        )
+    );
+  }
+
+  final List<CreditCardWidget> _creditCards = [
+    const CreditCardWidget(
+        cardNumber: '4106 6900 1046 7531',
+        expiryDate: '06/25',
+        cardHolderName: 'ZIGA POVHE',
+        cvvCode: '000',
+        showBackView: false),
+    const CreditCardWidget(
+        cardNumber: '5273 4689 9296 5788',
+        expiryDate: '09/24',
+        cardHolderName: 'ZIGA POVHE',
+        cvvCode: '721',
+        showBackView: false),
+    const CreditCardWidget(
+        cardNumber: '4748 1900 1035 0245',
+        expiryDate: '09/24',
+        cardHolderName: 'ZIGA POVHE',
+        cvvCode: '721',
+        showBackView: false)
+  ];
+}
+
+
+
 
 
