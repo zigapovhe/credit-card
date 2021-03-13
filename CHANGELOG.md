@@ -1,5 +1,7 @@
 ## 0.2.0-nullsafety.2
 *   Plugin now fully supports Maestro cards
+*   Added contactless logo
+*   Dropped American Express support, since it cannot be used in EU
 *   Code Improvements
 
 ## 0.2.0-nullsafety.1

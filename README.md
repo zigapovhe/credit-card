@@ -75,7 +75,6 @@ import 'package:credit_card/flutter_credit_card.dart';
 ## Supported Cards
     * Visa
     * Mastercard
-    * American Express
     * Discover
     * Diners Club
     * Maestro

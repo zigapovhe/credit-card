@@ -367,6 +367,13 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             ),
           ),
           Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 12, top: 24, bottom: 8),
+              child: getContactLessImage(),
+            ),
+          ),
+          Align(
             alignment: Alignment.bottomRight,
             child: Padding(
               padding:
@@ -386,10 +393,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       <CardType, Set<List<String>>>{
     CardType.visa: <List<String>>{
       <String>['4'],
-    },
-    CardType.americanExpress: <List<String>>{
-      <String>['34'],
-      <String>['37'],
     },
     CardType.discover: <List<String>>{
       <String>['6011'],
@@ -484,16 +487,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             height: 32,
             width: 32,
             semanticsLabel: 'Visa logo',
-            package: 'credit_card'
-        );
-        break;
-
-      case CardType.americanExpress:
-        icon = SvgPicture.asset(
-            'assets/amex.svg',
-            height: 32,
-            width: 32,
-            semanticsLabel: 'American Express logo',
             package: 'credit_card'
         );
         break;
@@ -708,7 +701,6 @@ enum CardType {
   otherBrand,
   mastercard,
   visa,
-  americanExpress,
   discover,
   maestro,
   dinersclub,
@@ -749,5 +741,18 @@ Container getChipImage() {
         semanticsLabel: 'Chip',
         package: 'credit_card'
     )
+  );
+}
+
+Container getContactLessImage() {
+  return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: SvgPicture.asset(
+          'assets/contactless.svg',
+          height: 32,
+          width: 32,
+          semanticsLabel: 'Contactless',
+          package: 'credit_card'
+      )
   );
 }
