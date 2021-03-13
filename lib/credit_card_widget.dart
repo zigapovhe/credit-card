@@ -37,15 +37,15 @@ class CreditCardWidget extends StatefulWidget {
 class _CreditCardWidgetState extends State<CreditCardWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late CardType cardType;
   Animation<double>? _frontRotation;
   Animation<double>? _backRotation;
   Gradient? backgroundGradientColor;
 
-  bool isAmex = false;
-
   @override
   void initState() {
     super.initState();
+    cardType = detectCCType(widget.cardNumber);
 
     ///initialize the animation controller
     controller = AnimationController(
@@ -108,6 +108,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     final Orientation orientation = MediaQuery.of(context).orientation;
+    cardType = detectCCType(widget.cardNumber);
 
     ///
     /// If uer adds CVV then toggle the card from front to back..
@@ -218,12 +219,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                               padding: const EdgeInsets.all(5),
                               child: AutoSizeText(
                                 widget.cvvCode.isEmpty
-                                    ? isAmex ? 'XXXX' : 'XXX'
-                                    : isAmex
-                                        ? widget.cvvCode.length > 4
-                                            ? widget.cvvCode.substring(0, 4)
-                                            : widget.cvvCode
-                                        : widget.cvvCode.length > 3
+                                    ? 'XXX'
+                                    : widget.cvvCode.length > 3
                                             ? widget.cvvCode.substring(0, 3)
                                             : widget.cvvCode,
                                 maxLines: 1,
@@ -308,8 +305,14 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                   padding: const EdgeInsets.only(left: 16),
                   child: AutoSizeText(
                     widget.cardNumber.isEmpty
-                        ? 'XXXX XXXX XXXX XXXX'
-                        : widget.cardNumber,
+                      ? cardType == CardType.maestro ? 'XXXX XXXX XXXX XXXX XXX' : 'XXXX XXXX XXXX XXXX'
+                      : cardType == CardType.maestro
+                  ? widget.cardNumber.length > 23
+                  ? widget.cardNumber.substring(0, 23)
+                        : widget.cardNumber
+                    : widget.cardNumber.length > 19
+                    ? widget.cardNumber.substring(0, 19)
+                : widget.cardNumber,
                     style: widget.textStyle ?? defaultTextStyle,
                   ),
                 ),
@@ -424,10 +427,10 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
   /// and returns it.
   CardType detectCCType(String cardNumber) {
     //Default card type is other
-    CardType cardType = CardType.otherBrand;
+    CardType _cardType = CardType.otherBrand;
 
     if (cardNumber.isEmpty) {
-      return cardType;
+      return _cardType;
     }
 
     cardNumPatterns.forEach(
@@ -452,14 +455,14 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             if (ccPrefixAsInt >= startPatternPrefixAsInt &&
                 ccPrefixAsInt <= endPatternPrefixAsInt) {
               // Found a match
-              cardType = type;
+              _cardType = type;
               break;
             }
           } else {
             // Just compare the single pattern prefix with the Credit Card prefix
             if (ccPatternStr == patternRange[0]) {
               // Found a match
-              cardType = type;
+              _cardType = type;
               break;
             }
           }
@@ -467,14 +470,14 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       },
     );
 
-    return cardType;
+    return _cardType;
   }
 
   // This method returns the icon for the visa card type if found
   // else will return the empty container
   Widget getCardTypeIcon(String cardNumber) {
     Widget icon;
-    switch (detectCCType(cardNumber)) {
+    switch (cardType) {
       case CardType.visa:
         icon = SvgPicture.asset(
             'assets/visa.svg',
@@ -483,7 +486,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'Visa logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       case CardType.americanExpress:
@@ -494,7 +496,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'American Express logo',
             package: 'credit_card'
         );
-        isAmex = true;
         break;
 
       case CardType.mastercard:
@@ -505,7 +506,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'Mastercard logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       case CardType.maestro:
@@ -516,7 +516,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'Maestro logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       case CardType.discover:
@@ -527,7 +526,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'Discover logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       case CardType.dinersclub:
@@ -538,7 +536,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'DinersClub logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       case CardType.hipercard:
@@ -549,7 +546,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             semanticsLabel: 'HiperCard logo',
             package: 'credit_card'
         );
-        isAmex = false;
         break;
 
       default:
@@ -557,7 +553,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           height: 32,
           width: 32,
         );
-        isAmex = false;
         break;
     }
 

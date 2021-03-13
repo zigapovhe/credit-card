@@ -39,22 +39,7 @@ class MainPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                   primary: kBlue
               ),
-              child: const Text('Credit card slider',
-                  style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => CreditCardSliderScreen(),
-                  ),
-                );
-              },
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: kBlue
-              ),
-              child: const Text('Credit card slider with tabs',
+              child: const Text('Credit Card Slider',
                   style: TextStyle(color: Colors.white)),
               onPressed: () {
                 Navigator.push(
@@ -79,21 +64,21 @@ Color kPurple = const Color(0xFFAF92FB);
 
 final List<CreditCardWidget> _creditCards = [
   const CreditCardWidget(
-      cardNumber: '4106 6900 1046 7531',
-      expiryDate: '06/25',
-      cardHolderName: 'ZIGA POVHE',
+      cardNumber: '5273 5102 4216 5731',
+      expiryDate: '01/26',
+      cardHolderName: 'NAME SURNAME',
+      cvvCode: '512',
+      showBackView: false),
+  const CreditCardWidget(
+      cardNumber: '6762 1267 7301 2329 788',
+      expiryDate: '09/26',
+      cardHolderName: 'NAME SURNAME',
       cvvCode: '000',
       showBackView: false),
   const CreditCardWidget(
-      cardNumber: '5273 4689 9296 5788',
+      cardNumber: '4748 1910 1258 0124',
       expiryDate: '09/24',
-      cardHolderName: 'ZIGA POVHE',
-      cvvCode: '721',
-      showBackView: false),
-  const CreditCardWidget(
-      cardNumber: '4748 1900 1035 0245',
-      expiryDate: '09/24',
-      cardHolderName: 'ZIGA POVHE',
+      cardHolderName: 'NAME SURNAME',
       cvvCode: '721',
       showBackView: false)
 ];

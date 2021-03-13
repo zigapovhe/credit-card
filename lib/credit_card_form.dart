@@ -49,13 +49,13 @@ class _CreditCardFormState extends State<CreditCardForm> {
   CreditCardModel? creditCardModel;
 
   final MaskedTextController _cardNumberController =
-      MaskedTextController(mask: '0000 0000 0000 0000');
+      MaskedTextController(mask: '0000 0000 0000 0000 000');
   final TextEditingController _expiryDateController =
       MaskedTextController(mask: '00/00');
   final TextEditingController _cardHolderNameController =
       TextEditingController();
   final TextEditingController _cvvCodeController =
-      MaskedTextController(mask: '0000');
+      MaskedTextController(mask: '000');
 
   FocusNode cardNumberNode = FocusNode();
   FocusNode cvvFocusNode = FocusNode();
@@ -143,7 +143,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
                 child: TextFormField(
                   controller: _cardNumberController,
-                  autofillHints: const  [AutofillHints.creditCardNumber],
+                  autofillHints: const <String> [AutofillHints.creditCardNumber],
                   cursorColor: widget.cursorColor ?? themeColor,
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(expiryDateNode);
@@ -160,7 +160,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   textInputAction: TextInputAction.next,
                   validator: (String? value) {
                     // Validate less that 13 digits +3 white spaces
-                    if (value!.isEmpty || value.length < 16) {
+                    if (value!.isEmpty || value.length < 19) {
                       return widget.numberValidationMessage;
                     }
                     return null;
@@ -175,7 +175,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
                       child: TextFormField(
                         controller: _expiryDateController,
-                        autofillHints: const [AutofillHints.creditCardExpirationDate],
+                        autofillHints: const <String> [AutofillHints.creditCardExpirationDate],
                         cursorColor: widget.cursorColor ?? themeColor,
                         style: TextStyle(
                           color: widget.textColor,
@@ -216,7 +216,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       child: TextFormField(
                         focusNode: cvvFocusNode,
                         controller: _cvvCodeController,
-                        autofillHints: const [AutofillHints.creditCardSecurityCode],
+                        autofillHints: const <String> [AutofillHints.creditCardSecurityCode],
                         cursorColor: widget.cursorColor ?? themeColor,
                         onEditingComplete: () {
                           FocusScope.of(context).requestFocus(cardHolderNode);
@@ -227,7 +227,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'CVV',
-                          hintText: 'XXXX',
+                          hintText: 'XXX',
                         ),
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.done,
@@ -253,7 +253,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
                 child: TextFormField(
                   controller: _cardHolderNameController,
-                  autofillHints: const [AutofillHints.creditCardGivenName],
+                  autofillHints: const <String> [AutofillHints.creditCardGivenName],
                   focusNode: cardHolderNode,
                   cursorColor: widget.cursorColor ?? themeColor,
                   style: TextStyle(

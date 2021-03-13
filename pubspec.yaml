@@ -1,6 +1,6 @@
 name: credit_card
 description: Cool Credit card widget
-version: 0.2.0-nullsafety.1
+version: 0.2.0-nullsafety.2
 author: Žiga Povhe <ziga@povhe.si>
 homepage: https://github.com/zigapovhe
 issue_tracker: https://github.com/zigapovhe

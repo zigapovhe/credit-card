@@ -1,3 +1,7 @@
+## 0.2.0-nullsafety.2
+*   Plugin now fully supports Maestro cards
+*   Code Improvements
+
 ## 0.2.0-nullsafety.1
 *   Credit Card Widget is now fully responsive
 *   Issues with CreditCardSlider are fixed
